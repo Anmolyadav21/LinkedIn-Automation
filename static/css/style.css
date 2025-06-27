@@ -1,0 +1,129 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: #f1f1f1;
+  font-family: 'Inter', sans-serif;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Container */
+.login-container {
+  width: 360px;
+  padding: 45px 32px;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.05);
+  text-align: left;
+}
+
+/* Heading */
+.login-container h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 24px;
+  font-weight: 600;
+  color: #000;
+}
+
+/* Labels */
+.login-container label {
+  display: block;
+  font-size: 14px;
+  color: #000;
+  margin-bottom: 8px;
+}
+
+/* Input fields */
+.login-container input[type="email"],
+.login-container input[type="password"]{
+  width: 100%;
+  padding: 12px 8px;
+  margin-bottom: 10px;
+  border: 1px solid #f1f1f1;
+  border-radius: 24px;
+  font-size: 14px;
+  outline: none;
+  background: #f9f9f9;
+}
+
+#name{
+  width: 100%;
+  padding: 12px 8px;
+  margin-bottom: 20px;
+  border: 1px solid #f1f1f1;
+  border-radius: 24px;
+  font-size: 14px;
+  outline: none;
+  background: #f9f9f9;
+}
+
+/* Password field with icon */
+.password-wrapper {
+  position: relative;
+}
+
+.password-wrapper input {
+  padding-right: 40px;
+}
+
+.password-wrapper .toggle-password {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 16px;
+  color: #999;
+}
+
+/* Checkbox */
+.options {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  font-size: 13px;
+  color: #555;
+}
+
+.options input[type="checkbox"] {
+  margin-right: 8px;
+}
+
+/* Button */
+.login-container button {
+  width: 100%;
+  padding: 15px 12px;
+  border: none;
+  border-radius: 25px;
+  background: #000;
+  color: #fff;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* Signup */
+.login-container .signup {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 13px;
+  color: #777;
+}
+
+.login-container .signup a {
+  color: #000;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.text-danger:empty {
+  padding: 0;
+}
+
+.text-danger {
+  color: red;
+  padding: 0px 3px 12px 0px;
+}

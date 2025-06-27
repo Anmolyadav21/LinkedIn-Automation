@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign-up</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script>
+        function validateForm() {
+        const email = document.getElementById("email");
+        const password = document.getElementById("password");
+
+        const emailError = document.getElementById("emailError");
+        const passwordError = document.getElementById("passwordError");
+
+        emailError.textContent = "";
+        passwordError.textContent = "";
+
+        let valid = true;
+
+        const emailVal = email.value.trim();
+        const passwordVal = password.value.trim();
+
+        if (emailVal === "") {
+            emailError.textContent = "Please enter your email.";
+            valid = false;
+      } else if (!emailVal.includes("@")) {
+            emailError.textContent = "Invalid email: missing '@'.";
+            valid = false;
+      }
+          if (passwordVal === "") {
+            passwordError.textContent = "Please enter your password.";
+            valid = false;
+          } else if (passwordVal.length < 8 || !/[A-Z]/.test(passwordVal) || !/[!@#$%^&*(),.?":{}|<>]/.test(passwordVal)) {
+            passwordError.textContent = "Password must be at least 8 characters long and must contain one uppercase and one special character.";
+            valid = false;
+          }
+
+          return valid; // Always return false to prevent form submission for testing
+        }
+    </script>
+</head>
+<body>
+    <div class="login-container" id="first_div">
+        <h2>Sign up</h2>
+        <form onsubmit="return validateForm()" action="{% url 'signup' %}" method="POST">
+            {% csrf_token %}
+            <div class="form-group" id="second_div">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" placeholder="Enter you name" name="name">
+                <label for="email">Email address</label>
+                <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+                <div class="text-danger">
+                <small id="emailError" class="text-danger"></small>
+                </div>
+            </div>
+
+            <div class="password-wrapper" id="third_div">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" placeholder="Password" name="password">
+                <div class="text-danger">
+                <small id="passwordError" class="text-danger"></small>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Get Started</button>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
