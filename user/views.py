@@ -27,15 +27,17 @@ def login(request):
         chk_pswd = request.POST['password']
         chk_email = request.POST['email']
 
-        user = Signup.objects.get(email=chk_email)
-
-        if user.password == chk_pswd:
-            return redirect('dashboard')
-        else:
-            return render(request, 'login.html', {'error':"Invalid Credentials"})
+        try:
+            user = Signup.objects.get(email=chk_email)
+            if user.password == chk_pswd:
+                request.session['email'] = user.email  # optional: to use in dashboard
+                return redirect('dashboard')
+            else:
+                return render(request, 'login.html', {'error': "Invalid password"})
+        except Signup.DoesNotExist:
+            return render(request, 'login.html', {'error': "User not found"})
 
     return render(request, 'login.html')
-
 
     # if request.method == 'POST':
     #     email = request.POST.get('email')
