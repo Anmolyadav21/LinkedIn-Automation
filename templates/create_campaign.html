@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Campaign</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <h2>Create Campaign</h2>
+<form method="post">
+    {% csrf_token %}
+    <div>
+        <label>Name:</label>
+        <input type="text" name="name" required>
+    </div>
+
+    <div>
+        <label>Lead List:</label>
+        <select name="lead_list" required>
+            {% for list in lead_lists %}
+                <option value="{{ list.id }}">{{ list.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div>
+        <label>Exclude Leads From:</label>
+        <select name="exclusion_lists" multiple>
+            {% for list in lead_lists %}
+                <option value="{{ list.id }}">{{ list.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div>
+        <label>Send From Accounts:</label>
+        <select name="sending_accounts" multiple required>
+            {% for acc in accounts %}
+                <option value="{{ acc.id }}">{{ acc.profile_name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <button type="submit">Create Campaign</button>
+</form>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<form method="post">
+    {% csrf_token %}
+
+    <div class="form-group">
+        <label>Email</label>
+        <input type="email" name="email" value="{{ account.email }}" class="form-control" required>
+    </div>
+
+    <div class="form-group">
+        <label>Profile Name</label>
+        <input type="text" name="profile_name" value="{{ account.profile_name }}" class="form-control" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update</button>
+    <a href="{% url 'tasks:dashboard' %}" class="btn btn-secondary">Cancel</a>
+</form>

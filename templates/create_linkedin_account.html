@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create LinkedIn Account</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <h2>Add LinkedIn Account</h2>
+    <form method="post">
+        {% csrf_token %}
+
+        <!-- Email Field -->
+        <div class="form-group">
+            <label for="email">LinkedIn Email</label>
+            <input type="email" class="form-control" id="email" name="email" required placeholder="Enter LinkedIn Email">
+        </div>
+
+        <!-- Password Field -->
+        <div class="form-group">
+            <label for="password">LinkedIn Password</label>
+            <input type="password" class="form-control" id="password" name="password" required placeholder="Enter LinkedIn Password">
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary">Save</button>
+
+        <!-- Cancel Button (Redirect to Dashboard) -->
+        <a href="{% url 'dashboard' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+</body>
+</html>

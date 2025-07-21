@@ -3,10 +3,21 @@ from django.contrib.auth import authenticate, login as django_login
 from django.contrib import messages
 from django.contrib.auth import logout
 from .models import Signup
+from tasks.models import LinkedInAccount
 
 # Dashboard view (after successful login)
+# def dashboard(request):
+#     return render(request, 'dashboard.html')
+
 def dashboard(request):
-    return render(request, 'dashboard.html')
+    linkedin_accounts = LinkedInAccount.objects.filter(user=request.user)
+    return render(request, 'dashboard.html', {'linkedin_accounts': linkedin_accounts})
+    # linkedin_accounts = LinkedInAccount.objects.all()  # or filter by user if needed
+    # return render(request, 'dashboard.html', {
+    #     'user': request.user,
+    #     'linkedin_accounts': linkedin_accounts
+    # })
+
 
 #Signup view
 def signup_view(request):
@@ -27,12 +38,15 @@ def login(request):
         chk_pswd = request.POST['password']
         chk_email = request.POST['email']
 
-        user = Signup.objects.get(email=chk_email)
-
-        if user.password == chk_pswd:
-            return redirect('dashboard')
-        else:
-            return render(request, 'login.html', {'error':"Invalid Credentials"})
+        try:
+            user = Signup.objects.get(email=chk_email)
+            if user.password == chk_pswd:
+                request.session['email'] = user.email  # optional: to use in dashboard
+                return redirect('dashboard')
+            else:
+                return render(request, 'login.html', {'error': "Invalid password"})
+        except Signup.DoesNotExist:
+            return render(request, 'login.html', {'error': "User not found"})
 
     return render(request, 'login.html')
 

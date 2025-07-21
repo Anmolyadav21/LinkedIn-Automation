@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'user.apps.UserConfig',
+    'tasks',
+    'django_crontab',
+
 ]
 
 MIDDLEWARE = [
@@ -51,6 +54,9 @@ MIDDLEWARE = [
 
 ]
 
+
+# settings.py
+# AUTH_USER_MODEL = 'user.Signup'  # This is crucial for Django to know you're using the custom user model
 
 ROOT_URLCONF = 'base.urls'
 
@@ -85,7 +91,8 @@ DATABASES = {
     }
 }
 
-
+CSRF_COOKIE_SECURE = False  # Only True if using HTTPS
+CSRF_COOKIE_HTTPONLY = False
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
@@ -129,3 +136,13 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CRONJOBS = [
+    ('*/5 * * * *', 'tasks.management.commands.process_sequences.Command')  # Run every 5 minutes
+]
+
+# settings.py
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'  # Use database-backed sessions
+
+SESSION_COOKIE_AGE = 3600  # Session timeout in seconds (1 hour)
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True  # Automatically expire session when browser is closed

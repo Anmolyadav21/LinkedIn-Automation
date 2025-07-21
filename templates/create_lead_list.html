@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Lead List</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <h2>Create a New Lead List</h2>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            <label>Lead List Name</label>
+            <input type="text" name="name" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <label>Source URL (optional)</label>
+            <input type="url" name="source_url" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label>Import CSV File (optional)</label>
+            <input type="file" name="import_csv_file" class="form-control-file">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Create</button>
+        <a href="{% url 'tasks:dashboard' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+</body>
+</html>

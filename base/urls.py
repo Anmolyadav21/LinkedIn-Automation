@@ -20,4 +20,6 @@ from django.urls import path, include  # 'include' allows inclusion of other app
 urlpatterns = [
     path('admin/', admin.site.urls),  # Admin panel URL
     path('', include('user.urls')),  # Include URLs from the 'user' app
+    path('tasks/', include('tasks.urls')),  # This line connects the tasks app
 ]
+

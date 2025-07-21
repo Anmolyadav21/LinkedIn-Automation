@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Inbox - Replies</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <h2>Unified Inbox</h2>
+
+    {% if replies %}
+        <table class="table table-bordered mt-4">
+            <thead>
+            <tr>
+                <th>LinkedIn Account</th>
+                <th>Lead</th>
+                <th>Message</th>
+                <th>Received At</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for reply in replies %}
+                <tr>
+                    <td>{{ reply.linkedin_account.email }}</td>
+                    <td>{{ reply.lead.first_name }} {{ reply.lead.last_name }}</td>
+                    <td>{{ reply.message_content|truncatewords:12 }}</td>
+                    <td>{{ reply.received_at }}</td>
+                    <td>{{ "Unread" if not reply.is_read else "Read" }}</td>
+                    <td>
+                        {% if not reply.is_read %}
+                            <a href="{% url 'tasks:mark_reply_as_read' reply.id %}" class="btn btn-sm btn-success">Mark as Read</a>
+                        {% else %}
+                            <span class="text-muted">—</span>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No replies found.</p>
+    {% endif %}
+
+    <a href="{% url 'tasks:dashboard' %}" class="btn btn-secondary mt-3">Back to Dashboard</a>
+</div>
+</body>
+</html>

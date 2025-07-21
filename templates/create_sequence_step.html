@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Sequence Step</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <h2>Add Step to Campaign: {{ campaign.name }}</h2>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label for="order">Step Order</label>
+            <input type="number" name="order" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <label for="action_type">Action Type</label>
+            <select name="action_type" class="form-control" required>
+                <option value="CONNECTION_REQUEST">Connection Request</option>
+                <option value="MESSAGE">Message</option>
+                <option value="INMAIL">InMail</option>
+                <option value="VIEW_PROFILE">View Profile</option>
+                <option value="LIKE_POST">Like Post</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="wait_days">Wait Days</label>
+            <input type="number" name="wait_days" class="form-control" value="0">
+        </div>
+
+        <div class="form-group">
+            <label for="message_content">Message Content</label>
+            <textarea name="message_content" class="form-control" rows="4"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save Step</button>
+        <a href="{% url 'tasks:view_campaign' campaign.id %}" class="btn btn-secondary ml-2">Cancel</a>
+    </form>
+</div>
+</body>
+</html>
